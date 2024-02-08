@@ -1,5 +1,5 @@
 .Container {
-  background-color: #b0ada5;
+  background-color:#b0ada5;
   flex-direction: column;
   margin: 0 auto;
   box-sizing: border-box;
@@ -30,12 +30,6 @@
 
 .left{
   padding: 0px 7.5%;
-}
-
-.messageContainer {
-  overflow: scroll;
-  height: 65vh;
-  padding: 8px;
 }
 
 .Container a{

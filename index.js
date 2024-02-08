@@ -48,6 +48,7 @@ const loginBtn = document.getElementById("loginBtn");
 const sendMessageBtn = document.getElementById("sendMessageBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const signupBtn = document.getElementById("signupBtn");
+const showPass = document.getElementById("showPassword");
 const messageInput = document.getElementById("messageInput");
 const messageContainer = document.getElementById("messageContainer");
 const emailText = document.getElementById("emailText");
@@ -59,6 +60,9 @@ const progressBar = document.getElementById("progressBar");
 const imagePreview = document.getElementById("imagePreview");
 const preview = document.getElementById("preview");
 const imageController = document.getElementById("imageController");
+
+const currentPageName = window.location.pathname.split("/").pop();
+console.log(currentPageName);
 
 const uploadTypes = {
   image: "image",
@@ -121,12 +125,11 @@ const onLoad = () => {
         window.location.href = "index.html";
       }
     } else {
-      if (currentPageName !== "" && currentPageName !== "login.html") {
+      if (currentPageName !== "login.html") {
         window.location.href = "login.html";
-      } else {
-        if (currentPageName !== "" && currentPageName !== "signup.html") {
-          window.location.href = "signup.html";
-        }
+      }else {
+        if (currentPageName !== "" && currentPageName !== "signup.html")
+        window.location.href = "signup.html"
       }
     }
   });
@@ -154,6 +157,19 @@ const signinwithEmail = () => {
       // ...
     });
 };
+
+const showPassword =()=>{
+  let passwordtype =document.getElementById("password"); 
+  console.log(passwordtype)
+  if(passwordtype.type !== "text"){
+    passwordtype.type="text";
+  }
+
+  else {
+     passwordtype.type = "password"
+  }
+  
+}
 
 const sendMessage = async ({ type = "text", imageURL }) => {
   const user = auth.currentUser;
@@ -289,6 +305,7 @@ loginBtn && loginBtn.addEventListener("click", loginWithGoogle);
 signupBtn && signupBtn.addEventListener("click", signinwithEmail);
 sendMessageBtn && sendMessageBtn.addEventListener("click", sendMessage);
 logoutBtn && logoutBtn.addEventListener("click", logout);
+showPass && showPass.addEventListener("click", showPassword);
 fileUploadBtn && fileUploadBtn.addEventListener("click", uploadImage);
 fileInput && fileInput.addEventListener("change", previewImage);
 cancelImageBtn && cancelImageBtn.addEventListener("click", cancelImage);
