@@ -20,7 +20,7 @@
   border: #4a4a48 solid;
 }
 
-.btn {
+.button{
   background-color: #4a4a48;
   color: black;
   margin: 0.7% 0;
@@ -54,4 +54,10 @@
 
 .password-toggle-icon i:hover {
   color: #000;
+}
+
+.messageContainer {
+  overflow: scroll;
+  height: 70vh;
+  padding: 10px;
 }

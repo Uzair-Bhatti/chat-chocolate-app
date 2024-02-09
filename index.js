@@ -6,7 +6,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-  sendSignInLinkToEmail,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 import {
@@ -127,37 +128,46 @@ const onLoad = () => {
     } else {
       if (currentPageName !== "login.html") {
         window.location.href = "login.html";
-      }else {
-        if (currentPageName !== "" && currentPageName !== "signup.html")
-        window.location.href = "signup.html"
       }
     }
   });
+
+  // signInWithEmailAndPassword(auth, email(user), password)
+  // .then((userCredential) => {
+  //   // Signed in 
+  //   const user = userCredential.user;
+  //   // ...
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  // });
 };
 onLoad();
 
+// signin with google starts //
 const loginWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {})
     .catch((error) => {});
 };
+// signin with google ends //
 
+// signin with email start //
 const signinwithEmail = () => {
-  sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(() => {
-      // The link was successfully sent. Inform the user.
-      // Save the email locally so you don't need to ask the user for it again
-      // if they open the link on the same device.
-      window.localStorage.setItem("emailForSignIn", email);
-      console.log(email);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ...
-    });
-};
-
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+}
+// signin with email ends
 const showPassword =()=>{
   let passwordtype =document.getElementById("password"); 
   console.log(passwordtype)
@@ -171,7 +181,7 @@ const showPassword =()=>{
   
 }
 
-const sendMessage = async ({ type = "text", imageURL }) => {
+const sendMessage = async ({ type = "text"}) => {
   const user = auth.currentUser;
   const text = messageInput.value;
   const id = Date.now();
